@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+@theme {
+  --color-primary: #ea580c;
+  --color-secondary: #fb923c;
+  --color-accent: #7dd3fc;
+  --color-highlight: #1d4ed8;
+  --color-background: #ffffff;
+}
+
+body {
+  @apply bg-background text-black;
+}
+
+@keyframes rocketFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+.rocket-float {
+  animation: rocketFloat 4.8s ease-in-out infinite;
+}
