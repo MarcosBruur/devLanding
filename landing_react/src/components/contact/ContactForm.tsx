@@ -3,10 +3,11 @@ import type { FormEvent } from "react";
 
 const CONTACT_API_URL = import.meta.env.PROD
   ? "/contact.php"
-  : import.meta.env.VITE_CONTACT_API_URL ?? "/api/contact";
+  : (import.meta.env.VITE_CONTACT_API_URL ?? "/api/contact");
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [feedback, setFeedback] = useState<{
     type: "success" | "error";
     message: string;
