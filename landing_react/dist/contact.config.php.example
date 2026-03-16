@@ -1,0 +1,13 @@
+<?php
+
+return [
+    // Use SendGrid (preferred if SENDGRID_API_KEY is defined)
+    "SENDGRID_API_KEY" => "",
+    "SENDGRID_FROM_EMAIL" => "Landing <no-reply@tu-dominio.com>",
+    "SENDGRID_TO_EMAIL" => "tu-email@dominio.com",
+
+    // Fallback: Resend
+    "RESEND_API_KEY" => "re_xxxxxxxxxxxxxxxxxxxxx",
+    "RESEND_FROM_EMAIL" => "Landing <onboarding@resend.dev>",
+    "RESEND_TO_EMAIL" => "tu-email@dominio.com",
+];
