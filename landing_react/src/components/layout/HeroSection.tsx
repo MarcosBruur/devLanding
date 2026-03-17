@@ -16,8 +16,9 @@ export function HeroSection() {
           <span className="text-primary">que tu empresa necesita</span>
         </h1>
         <p className="text-base text-black/80 sm:text-lg">
-          Diseno y construyo soluciones a medida para empresas que quieren vender mas,
-          trabajar mejor y automatizar procesos clave.
+          Diseño y construyo soluciones a medida para empresas que quieren
+          presencia en la red, trabajar de forma eficiente y automatizar
+          procesos clave.
         </p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <a

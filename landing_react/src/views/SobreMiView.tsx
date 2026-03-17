@@ -33,7 +33,7 @@ export function SobreMiView() {
         </div>
         <div className="rounded-none p-0 sm:rounded-2xl sm:p-3">
           <div className="relative left-1/2 mb-4 w-screen -translate-x-1/2 sm:hidden">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-none">
+            <div className="relative aspect-16/10 overflow-hidden rounded-none">
               {isProfileMobilePlaying ? (
                 <video
                   src="/marcos2.mp4"

@@ -24,20 +24,13 @@ export const cases: CaseStudy[] = [
     video: "/copycom4.mp4",
   },
   {
-    title: "Panel de metricas y control de stock",
+    title:
+      "Sistema de venta, control de stock y administración para empresa gráfica",
     result:
-      "Aumento de 28% en conversion al tomar decisiones con datos diarios.",
+      "Se consiguio un aumento de eficiencia operativa, una mejora en la toma de decisiones y reducción de costos.",
     detail:
-      "Se integraron ventas, campanas y comportamiento de clientes en un unico dashboard automatizado.",
+      "Se integraron ventas, control de stock, métricas, administración de sucursales, horarios de entrada/salida y mucho más en un único sistema.",
     image: "/copycom2.jpeg",
-    video: "/copycom3.mp4",
-  },
-  {
-    title: "Automatizacion de soporte interno",
-    result: "Disminucion de 55% en tickets manuales repetitivos.",
-    detail:
-      "Se desarrollo un flujo que centraliza solicitudes, asigna prioridades y reporta tiempos de respuesta.",
-    image: "/copycom.png",
     video: "/copycom3.mp4",
   },
 ];
@@ -96,7 +89,7 @@ export const services: ServiceItem[] = [
 export const aboutMe: AboutMeData = {
   name: "Marcos Bruno",
   role: "Desarrollador de software independiente",
-  years: "3+ anos de experiencia",
+  years: "3+ años de experiencia",
   intro:
     "Me especializo en transformar ideas en productos digitales utiles, simples de usar y enfocados en resultados.",
   highlights: [

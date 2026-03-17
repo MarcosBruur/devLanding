@@ -10,8 +10,13 @@ export function CasosExitoView() {
 
   const casePages = useMemo(
     () =>
-      Array.from({ length: Math.ceil(cases.length / casesPerPage) }, (_, pageIndex) =>
-        cases.slice(pageIndex * casesPerPage, pageIndex * casesPerPage + casesPerPage),
+      Array.from(
+        { length: Math.ceil(cases.length / casesPerPage) },
+        (_, pageIndex) =>
+          cases.slice(
+            pageIndex * casesPerPage,
+            pageIndex * casesPerPage + casesPerPage,
+          ),
       ),
     [casesPerPage],
   );
@@ -19,7 +24,9 @@ export function CasosExitoView() {
   const hasCaseCarousel = cases.length > casesPerPage;
 
   const goPrevCases = () => {
-    setCurrentCasePage((prev) => (prev - 1 + casePages.length) % casePages.length);
+    setCurrentCasePage(
+      (prev) => (prev - 1 + casePages.length) % casePages.length,
+    );
   };
 
   const goNextCases = () => {
@@ -27,11 +34,10 @@ export function CasosExitoView() {
   };
 
   return (
-    <section
-      id="casos"
-      className="scroll-mt-24 mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-16 lg:px-8"
-    >
-      <h2 className="mb-6 text-2xl font-bold text-primary sm:text-3xl">Casos de exito</h2>
+    <section id="casos" className="scroll-mt-24  py-12 sm:px-6 md:py-16 ">
+      <h2 className="mb-6 text-2xl font-bold text-primary sm:text-3xl mx-5">
+        Casos de exito
+      </h2>
       <div className="relative">
         <div className="overflow-hidden">
           <div
@@ -40,7 +46,7 @@ export function CasosExitoView() {
           >
             {casePages.map((page, pageIndex) => (
               <div key={`cases-page-${pageIndex}`} className="min-w-full">
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid gap-3 md:grid-cols-2 mt-2">
                   {page.map((item) => (
                     <CaseCard
                       key={item.title}
@@ -56,7 +62,9 @@ export function CasosExitoView() {
           </div>
         </div>
 
-        {hasCaseCarousel && <CaseCarouselControls onPrev={goPrevCases} onNext={goNextCases} />}
+        {hasCaseCarousel && (
+          <CaseCarouselControls onPrev={goPrevCases} onNext={goNextCases} />
+        )}
       </div>
     </section>
   );
