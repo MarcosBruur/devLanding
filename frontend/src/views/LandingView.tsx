@@ -132,12 +132,6 @@ export function LandingView() {
           <ScrollReveal className="section-heading-reveal">
             <div className="section-heading">
               <div>
-                <p className="eyebrow">
-                  <span className="small-star" aria-hidden="true">
-                    ✳
-                  </span>{" "}
-                  SOLUCIONES MBU / 01—02
-                </p>
                 <h2 id="catalog-title">
                   Echale un vistazo a
                   <br />
