@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-User=deploy
-Group=deploy
+User=root
+Group=root
 WorkingDirectory=/srv/mbu/backend
 Environment=PYTHONUNBUFFERED=1
 ExecStart=/srv/mbu/venv/bin/gunicorn --workers 2 --bind 127.0.0.1:8001 backend.wsgi:application
