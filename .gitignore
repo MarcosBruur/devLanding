@@ -1,0 +1,13 @@
+venv/
+node_modules/
+frontend/dist/
+backend/static/frontend/build/
+backend/static/frontend/assets/
+backend/static/frontend/index.html
+backend/staticfiles/
+*.py[cod]
+__pycache__/
+.env
+frontend/.env
+backend/.env
+.DS_Store

@@ -1,0 +1,43 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f5f1" />
+    <meta name="description" content="Explorá nuestro catálogo de software y compará sus versiones disponibles." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Software pensado para avanzar | MBU" />
+    <meta property="og:description" content="Conocé nuestros productos y explorá sus versiones disponibles." />
+    <title>Software pensado para avanzar | MBU</title>
+    <link rel="stylesheet" href="{% static 'frontend/build/assets/app.css' %}" />
+    <script type="module" src="{% static 'frontend/build/assets/app.js' %}"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    {% if dev_reload %}
+    <script>
+      (() => {
+        let currentVersion;
+        async function checkBuild() {
+          try {
+            const response = await fetch('/__dev__/build-version/', { cache: 'no-store' });
+            if (!response.ok) return;
+            const { version } = await response.json();
+            if (!version) return;
+            if (currentVersion && currentVersion !== version) {
+              window.location.reload();
+            } else {
+              currentVersion = version;
+            }
+          } catch {
+            // Django may be restarting while files change.
+          }
+        }
+        checkBuild();
+        setInterval(checkBuild, 1000);
+      })();
+    </script>
+    {% endif %}
+  </body>
+</html>
