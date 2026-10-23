@@ -4,6 +4,7 @@ import { products } from "../data/products";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { ServiceDetail } from "../components/ServiceDetail";
 import { services } from "../data/services";
+import { ContactSection } from "../components/ContactSection";
 
 export function LandingView() {
   return (
@@ -20,9 +21,7 @@ export function LandingView() {
               />
             </a>
 
-            <span className="hero-meta-right">
-              SOFTWARE QUE SE ADAPTA A VOS <span aria-hidden="true">✳</span>
-            </span>
+            <span className="hero-meta-right">BRUTECH</span>
           </div>
           <div className="hero-content">
             <div className="hero-copy">
@@ -161,6 +160,7 @@ export function LandingView() {
             </p>
           </ScrollReveal>
         </section>
+        <ContactSection />
       </main>
       <SiteFooter />
     </>

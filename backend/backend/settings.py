@@ -14,6 +14,7 @@ INSTALLED_APPS = ["django.contrib.staticfiles"]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
 ]
 ROOT_URLCONF = "backend.urls"
 TEMPLATES = [
@@ -44,3 +45,16 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static", BASE_DIR / "media" / "imagenes"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Contact form: configure an SMTP server in backend/.env before sending messages.
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.getenv("EMAIL_HOST", "")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+# Port 465 uses implicit SSL; port 587 uses STARTTLS. Explicit env flags take precedence.
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", str(EMAIL_PORT == 465)).lower() == "true"
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", str(not EMAIL_USE_SSL)).lower() == "true"
+EMAIL_TIMEOUT = 10
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "")
+CONTACT_EMAIL_TO = os.getenv("CONTACT_EMAIL_TO", "marcosbruur@gmail.com")

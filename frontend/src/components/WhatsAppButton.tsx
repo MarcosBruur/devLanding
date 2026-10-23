@@ -1,8 +1,10 @@
+import { WHATSAPP_URL } from '../api/contact'
+
 export function WhatsAppButton() {
   return (
     <a
       className="whatsapp-button"
-      href="https://wa.me/543865452354"
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Consultar por WhatsApp (abre una nueva pestaña)"

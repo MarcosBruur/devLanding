@@ -1,9 +1,14 @@
 from django.conf import settings
+from django.utils.decorators import method_decorator
 from django.http import Http404, JsonResponse
 from django.urls import path
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 
+from backend.email import send_contact_email
 
+
+@method_decorator(ensure_csrf_cookie, name="dispatch")
 class FrontendView(TemplateView):
     template_name = "index.html"
 
@@ -29,6 +34,7 @@ def dev_build_version(request):
 
 urlpatterns = [
     path("", FrontendView.as_view(), name="home"),
+    path("api/contacto/", send_contact_email, name="contact-email"),
     path(
         "contratar/<str:producto>/<str:plan>",
         FrontendView.as_view(),
