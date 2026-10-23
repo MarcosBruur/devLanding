@@ -153,12 +153,6 @@ export function LandingView() {
               </ScrollReveal>
             ))}
           </div>
-          <ScrollReveal>
-            <p className="catalog-note">
-              Los productos y recursos visuales actuales son ilustrativos. Los
-              detalles comerciales están pendientes de definir.
-            </p>
-          </ScrollReveal>
         </section>
         <ContactSection />
       </main>

@@ -47,19 +47,14 @@ export function ContactSection() {
             <br />
             <em>Algo Juntos</em>
           </h2>
-          <p>
-            Contanos qué tenés en mente. Dejanos un mensaje para que y
-            conversemos.
-          </p>
+          <p>Contanos qué tenés en mente. Dejanos un mensaje y conversemos.</p>
           <span className="contact-decor" aria-hidden="true">
             ↗
           </span>
         </ScrollReveal>
         <ScrollReveal className="contact-form-reveal" delay={120}>
           <div className="contact-panel">
-            <p className="contact-panel-heading">
-              DEJANOS UN MENSAJE <span aria-hidden="true">01 / 02</span>
-            </p>
+            <p className="contact-panel-heading">DEJANOS UN MENSAJE</p>
             <form onSubmit={handleSubmit} className="contact-form">
               <label htmlFor="contact-email">Email</label>
               <input

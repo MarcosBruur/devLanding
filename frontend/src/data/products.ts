@@ -13,7 +13,7 @@ export const products: Product[] = [
       {
         id: "regular",
         name: "Plan regular",
-        description: "Detalles pendientes de definir.",
+
         price: null,
         features: [
           "Control de Stock",
@@ -31,7 +31,7 @@ export const products: Product[] = [
       {
         id: "enterprise",
         name: "Plan Enterprise",
-        description: "Detalles pendientes de definir.",
+
         price: null,
         features: [
           "Control de Stock",
@@ -58,17 +58,28 @@ export const products: Product[] = [
       {
         id: "regular",
         name: "Plan regular",
-        description: "Detalles pendientes de definir.",
         price: null,
-        features: [],
-        restrictions: [],
+        features: [
+          "Gestion de pedidos",
+          "Gestion de cocina",
+          "Gestion de mesas",
+          "Reportes y estadisticas",
+        ],
+        restrictions: ["Facturación electrónica", "Integración con deliverys"],
       },
       {
         id: "enterprise",
         name: "Plan Enterprise",
-        description: "Detalles pendientes de definir.",
+
         price: null,
-        features: [],
+        features: [
+          "Gestion de pedidos",
+          "Gestion de cocina",
+          "Gestion de mesas",
+          "Reportes y estadisticas",
+          "Facturación electrónica",
+          "Integración con deliverys",
+        ],
         restrictions: [],
       },
     ],

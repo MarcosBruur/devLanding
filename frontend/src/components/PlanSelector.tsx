@@ -32,7 +32,7 @@ export function PlanSelector({
               <span className="plan-radio" aria-hidden="true" />
             </span>
             <span className="plan-name">{plan.name}</span>
-            <span className="plan-description">{plan.description}</span>
+
             {plan.features.length + plan.restrictions.length > 0 ? (
               <span className="plan-feature-list" role="list">
                 {plan.features.map((feature) => (
