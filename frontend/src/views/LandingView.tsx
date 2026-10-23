@@ -5,24 +5,14 @@ import { ScrollReveal } from "../components/ScrollReveal";
 import { ServiceDetail } from "../components/ServiceDetail";
 import { services } from "../data/services";
 import { ContactSection } from "../components/ContactSection";
+import { SiteHeader } from "../components/SiteHeader";
 
 export function LandingView() {
   return (
     <>
       <main id="top">
         <section className="hero" aria-labelledby="hero-title">
-          <div className="hero-meta">
-            <a className="landing-logo" href="#top" aria-label="Ir al inicio">
-              <img
-                src="/static/logo.jpeg"
-                alt="logoBT"
-                width="72"
-                height="72"
-              />
-            </a>
-
-            <span className="hero-meta-right">BRUTECH</span>
-          </div>
+          <SiteHeader homeHref="#top" />
           <div className="hero-content">
             <div className="hero-copy">
               <p className="eyebrow hero-kicker">
