@@ -33,6 +33,7 @@
 .product-media.has-video{height:auto;aspect-ratio:16/9}
 .product-media.has-video img,.product-media.has-video video{object-fit:contain}
 .product-media.has-video img{transition:opacity .25s}
+.product-media.has-cropped-video img{object-fit:cover;padding:0}
 .product-media.is-playing img{opacity:0}
 .product-media.video-only video{opacity:1;transition:none}
 .product-video-frame{position:absolute;inset:16px;overflow:hidden;pointer-events:none}
@@ -52,12 +53,10 @@
 .demo-toggle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:72px;height:72px;border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(16,22,30,.78);color:#fff;transition:opacity .2s,background .2s}
 .demo-toggle svg{width:32px;height:32px}
 .demo-toggle:hover{background:rgba(38,62,132,.92)}
-.demo-toggle.is-playing{opacity:0;pointer-events:none}
-.demo-toggle.is-playing:focus-visible{opacity:1;pointer-events:auto}
-@media(hover:hover) and (pointer:fine){.demo-stage:hover .demo-toggle.is-playing{opacity:1;pointer-events:auto}}
-.demo-controls{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-between;gap:16px;padding:24px max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));background:linear-gradient(transparent,rgba(0,0,0,.85))}
-.demo-controls button{min-width:110px;min-height:48px;border:1px solid rgba(255,255,255,.65);border-radius:9px;background:rgba(16,22,30,.85);color:#fff;font-size:15px;font-weight:700}
-.demo-controls button:hover{background:var(--blue)}
+.demo-exit{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));display:grid;place-items:center;width:52px;height:52px;border:0;background:none;color:#fff}
+.demo-exit svg{width:26px;height:26px}
+.demo-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.demo-error{position:absolute;bottom:75px;left:24px;right:24px;margin:0;text-align:center;color:#fff;font-size:15px;text-shadow:0 1px 5px #000}
 @media(max-width:700px) and (orientation:portrait){
   .demo-stage{position:absolute;top:50%;left:50%;width:100dvh;height:100vw;transform:translate(-50%,-50%) rotate(90deg)}
 }

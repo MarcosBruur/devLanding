@@ -7,6 +7,7 @@ export const products: Product[] = [
     name: "TPV",
     description:
       "Sistema de gestión de negocios pensado para administrar todo desde un mismo punto, podés gestionar tu stock, empleados, clientes y ventas. Además cuentas con un modulo de reportes para siempre estar al tanto de cómo va tu negocio y tomar decisiones más acertadas.",
+    img: "/static/frontend/previews/tpv.png",
     video: "/static/frontend/previews/tpv.mp4",
     videoPreviewAspectRatio: 2.02,
     plans: [
@@ -52,6 +53,7 @@ export const products: Product[] = [
     name: "Gestion Gastronomía",
     description:
       "Sistema de gestión de negocios del sector gastronómico pensado para administrar todo desde un mismo punto, podés gestionar tus pedidos, empleados, cocina y ventas. Además cuentas con un modulo de reportes para siempre estar al tanto de cómo va tu negocio y tomar decisiones más acertadas.",
+    img: "/static/frontend/previews/bar.png",
     video: "/static/frontend/previews/bar.mp4",
     videoPreviewAspectRatio: 1.92,
     plans: [
