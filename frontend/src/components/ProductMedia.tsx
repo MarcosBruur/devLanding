@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { createPortal, flushSync } from "react-dom";
+import { ArrowsPointingInIcon } from "@heroicons/react/24/outline";
 import type { Product } from "../types/catalog";
 
 interface Props {
@@ -12,19 +13,20 @@ export function ProductMedia({ product, index }: Props) {
   const demoRef = useRef<HTMLDivElement>(null);
   const demoVideoRef = useRef<HTMLVideoElement>(null);
   const openButtonRef = useRef<HTMLButtonElement>(null);
-  const backButtonRef = useRef<HTMLButtonElement>(null);
   const orientationLockedRef = useRef(false);
   const hoveredRef = useRef(false);
   const [playing, setPlaying] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
   const [demoPlaying, setDemoPlaying] = useState(false);
+  const [controlsVisible, setControlsVisible] = useState(false);
+  const [videoError, setVideoError] = useState(false);
   const videoOnly = Boolean(product.video && !product.img);
 
   useEffect(() => {
     if (!demoOpen) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    backButtonRef.current?.focus();
+    demoRef.current?.focus();
 
     function handleFullscreenChange() {
       if (!document.fullscreenElement) closeDemo();
@@ -46,6 +48,12 @@ export function ProductMedia({ product, index }: Props) {
     };
   }, [demoOpen]);
 
+  useEffect(() => {
+    if (!demoOpen || !demoPlaying || !controlsVisible) return;
+    const timeout = window.setTimeout(() => setControlsVisible(false), 3000);
+    return () => window.clearTimeout(timeout);
+  }, [demoOpen, demoPlaying, controlsVisible]);
+
   function closeDemo() {
     demoVideoRef.current?.pause();
     if (document.fullscreenElement === demoRef.current) {
@@ -53,16 +61,21 @@ export function ProductMedia({ product, index }: Props) {
     }
     setDemoOpen(false);
     setDemoPlaying(false);
+    setControlsVisible(false);
   }
 
   function openDemo() {
     stopPreview();
     // Render the player before requesting fullscreen, while the click still has user activation.
+    setVideoError(false);
+    setControlsVisible(false);
     flushSync(() => setDemoOpen(true));
     const video = demoVideoRef.current;
     if (video) {
-      video.currentTime = 0;
-      void video.play().catch(() => setDemoPlaying(false));
+      void video.play().catch(() => {
+        setDemoPlaying(false);
+        setControlsVisible(true);
+      });
     }
     const fullscreen = demoRef.current?.requestFullscreen?.();
     if (fullscreen) {
@@ -82,8 +95,17 @@ export function ProductMedia({ product, index }: Props) {
   function toggleDemo() {
     const video = demoVideoRef.current;
     if (!video) return;
-    if (video.paused) void video.play().catch(() => setDemoPlaying(false));
+    if (video.paused) {
+      void video.play().catch(() => {
+        setDemoPlaying(false);
+        setControlsVisible(true);
+      });
+    }
     else video.pause();
+  }
+
+  function handleScreenTap() {
+    if (demoPlaying) setControlsVisible((visible) => !visible);
   }
 
   function startPreview() {
@@ -120,7 +142,7 @@ export function ProductMedia({ product, index }: Props) {
       {product.img ? (
         <img
           src={product.img}
-          alt={`Ilustración de ejemplo de ${product.name}`}
+          alt={`Vista previa de ${product.name}`}
           loading="lazy"
           width="900"
           height="600"
@@ -155,35 +177,46 @@ export function ProductMedia({ product, index }: Props) {
       </button>
     )}
     {product.video && demoOpen && createPortal(
-      <div ref={demoRef} className="demo-overlay" role="dialog" aria-modal="true" aria-label={`Demostración de ${product.name}`}>
-        <div className="demo-stage">
+      <div ref={demoRef} tabIndex={-1} className="demo-overlay" role="dialog" aria-modal="true" aria-label={`Demostración de ${product.name}`}>
+        <div className="demo-stage" onClick={handleScreenTap}>
           <video
             ref={demoVideoRef}
             src={product.video}
             poster={product.img}
             playsInline
             preload="none"
-            onClick={toggleDemo}
-            onPlay={() => setDemoPlaying(true)}
-            onPause={() => setDemoPlaying(false)}
-            onEnded={() => setDemoPlaying(false)}
+            onPlaying={() => { setDemoPlaying(true); setVideoError(false); }}
+            onPause={() => { setDemoPlaying(false); setControlsVisible(true); }}
+            onEnded={() => { setDemoPlaying(false); setControlsVisible(true); }}
+            onError={() => { setVideoError(true); setDemoPlaying(false); setControlsVisible(true); }}
             aria-label={`Demostración de ${product.name}`}
           />
-          <button
-            className={`demo-toggle${demoPlaying ? " is-playing" : ""}`}
-            type="button"
-            onClick={toggleDemo}
-            aria-label={demoPlaying ? "Pausar demostración" : "Reproducir demostración"}
-          >
-            {demoPlaying ? (
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1" /><rect x="14" y="4" width="5" height="16" rx="1" /></svg>
-            ) : (
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 3.8a1 1 0 0 1 1.5-.86l12 8.2a1 1 0 0 1 0 1.72l-12 8.2A1 1 0 0 1 7 20.2Z" /></svg>
-            )}
-          </button>
-          <div className="demo-controls">
-            <button ref={backButtonRef} type="button" onClick={closeDemo}>← Volver</button>
-          </div>
+          {videoError && product.img && <img className="demo-fallback" src={product.img} alt="" />}
+          {videoError && <p className="demo-error" role="alert">No se pudo reproducir el video en este dispositivo.</p>}
+          {(!demoPlaying || controlsVisible) && (
+            <>
+              <button
+                className="demo-toggle"
+                type="button"
+                onClick={(event) => { event.stopPropagation(); toggleDemo(); }}
+                aria-label={demoPlaying ? "Pausar demostración" : "Reproducir demostración"}
+              >
+                {demoPlaying ? (
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1" /><rect x="14" y="4" width="5" height="16" rx="1" /></svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 3.8a1 1 0 0 1 1.5-.86l12 8.2a1 1 0 0 1 0 1.72l-12 8.2A1 1 0 0 1 7 20.2Z" /></svg>
+                )}
+              </button>
+              <button
+                className="demo-exit"
+                type="button"
+                onClick={(event) => { event.stopPropagation(); closeDemo(); }}
+                aria-label="Salir de pantalla completa"
+              >
+                <ArrowsPointingInIcon aria-hidden="true" />
+              </button>
+            </>
+          )}
         </div>
       </div>,
       document.body,
